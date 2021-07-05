@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">QRecipeCorriere</string>
+    <string name="ingredient"><u>Ingredienti</u></string>
+
 </resources>
