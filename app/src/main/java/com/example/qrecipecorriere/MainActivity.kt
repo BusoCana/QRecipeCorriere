@@ -51,16 +51,16 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, SecondActivity::class.java)
 
             //put order info in the intent
-            intent.putExtra("order id", list[position].id)
-            intent.putExtra("order ingredients", list[position].ingredients)
-            intent.putExtra("order user name", list[position].userName)
-            intent.putExtra("order user surname", list[position].userSurname)
-            intent.putExtra("order user address", list[position].userAddress)
-            intent.putExtra("order user cellular", list[position].userCellular)
-            intent.putExtra("order user email", list[position].userEmail)
-            intent.putExtra("order place date", list[position].placeDate)
-            intent.putExtra("order arrive date", list[position].arriveDate)
-            intent.putExtra("order state", list[position].orderState)
+            intent.putExtra("order id", temp.id)
+            intent.putExtra("order ingredients", temp.ingredients)
+            intent.putExtra("order user name", temp.userName)
+            intent.putExtra("order user surname", temp.userSurname)
+            intent.putExtra("order user address", temp.userAddress)
+            intent.putExtra("order user cellular", temp.userCellular)
+            intent.putExtra("order user email", temp.userEmail)
+            intent.putExtra("order place date", temp.placeDate)
+            intent.putExtra("order arrive date", temp.arriveDate)
+            intent.putExtra("order state", temp.orderState)
 
             //start second activity
             startActivity(intent)

@@ -11,7 +11,8 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:paddingStart="4dp"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:focusable="false"/>
 
     <TextView
         android:id="@+id/ingredientNameView"
