@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -66,4 +67,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    fun addOrderToList(o: Order) {
+        list.add(o)
+        adapter.notifyDataSetChanged()
+        Log.v(TAG, "added not arrived order: ${o.id}, to list")
+    }
+
 }

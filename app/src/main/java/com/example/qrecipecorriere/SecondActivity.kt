@@ -10,19 +10,29 @@ import kotlinx.android.synthetic.main.activity_second.*
 class SecondActivity : AppCompatActivity() {
 
     private val TAG = "SecondActivity"
+
+    private val m = MainActivity()
     private lateinit var order: Order
 
     private var checked = 0
+    private var arrived = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
         setSupportActionBar(toolbar)
 
+
         toolbar.setNavigationOnClickListener {
             //TODO: update order state in firebase (orderState = "placed")
 
-            //handle navigation icon press
+            if(!arrived) {
+                order.orderState = "placed"
+                m.addOrderToList(order)
+                Log.v(TAG, "Send not arrived order: ${order.id}, to main activity")
+            }
+
+            //close second activity
             this.finish()
         }
 
@@ -73,6 +83,7 @@ class SecondActivity : AppCompatActivity() {
         sendButton.setOnClickListener {
             Toast.makeText(this, "Order arrived to user address", Toast.LENGTH_SHORT).show()
             Log.v(TAG, "Order arrived to user address")
+            arrived = true
 
             //TODO: update order state in firebase (orderState = "arrived")
         }

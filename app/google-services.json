@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "377724053618",
+    "firebase_url": "https://qrecipeprovalayout-2aed1-default-rtdb.firebaseio.com",
+    "project_id": "qrecipeprovalayout-2aed1",
+    "storage_bucket": "qrecipeprovalayout-2aed1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377724053618:android:36fad7f3456abb50687aeb",
+        "android_client_info": {
+          "package_name": "com.example.qrecipecorriere"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "377724053618-039e2u25v1vqre7ujemsq69s68ogdd5h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAoQ2IxtEK9t-naJV7VKktBeVqae8EhyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "377724053618-039e2u25v1vqre7ujemsq69s68ogdd5h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377724053618:android:99d7227709ca5d11687aeb",
+        "android_client_info": {
+          "package_name": "com.example.qrecipeprovalayout"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "377724053618-039e2u25v1vqre7ujemsq69s68ogdd5h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAoQ2IxtEK9t-naJV7VKktBeVqae8EhyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "377724053618-039e2u25v1vqre7ujemsq69s68ogdd5h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
