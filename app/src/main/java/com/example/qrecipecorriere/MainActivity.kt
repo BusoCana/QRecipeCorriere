@@ -13,8 +13,8 @@ class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
 
     //get order from firebase
-    private var mUserReference: DatabaseReference? = FirebaseDatabase.getInstance("https://qrecipeprovalayout-2aed1-default-rtdb.firebaseio.com/").getReference("order")
-    private var mUsersChildListener: ChildEventListener = getUsersChildEventListener()
+    private var mOrderReference: DatabaseReference? = FirebaseDatabase.getInstance("https://qrecipeprovalayout-2aed1-default-rtdb.firebaseio.com/").getReference("order")
+    private var mOrderChildListener: ChildEventListener = getUsersChildEventListener()
 
     private val placedOrders = ArrayList<Order>()
     private val adapter = MainAdapter(this, placedOrders)
@@ -28,39 +28,43 @@ class MainActivity : AppCompatActivity() {
 
         //on item clicked start second activity
         placedOrdersView.setOnItemClickListener { parent, view, position, id ->
-            //TODO: update order state in firebase (orderState = "in charge")
+            val selectedOrder: Order = placedOrders[position]
+
+            //update order state in firebase (orderState = "in charge")
+            selectedOrder.orderState = "in charge"
+            mOrderReference!!.child(selectedOrder.id).child("orderState").setValue("in charge")
 
             //create intent to second activity with the selected order and start second activity
             val intent = Intent(this, SecondActivity::class.java)
 
-            intent.putExtra("order id", placedOrders[position].id)
-            intent.putExtra("order ingredients", placedOrders[position].ingredients)
-            intent.putExtra("order user name", placedOrders[position].userName)
-            intent.putExtra("order user surname", placedOrders[position].userSurname)
-            intent.putExtra("order user address", placedOrders[position].userAddress)
-            intent.putExtra("order user cellular", placedOrders[position].userCellular)
-            intent.putExtra("order user email", placedOrders[position].userEmail)
-            intent.putExtra("order place date", placedOrders[position].placeDate)
-            intent.putExtra("order arrive date", placedOrders[position].arriveDate)
-            intent.putExtra("order state", placedOrders[position].orderState)
+            intent.putExtra("order id", selectedOrder.id)
+            intent.putExtra("order ingredients", selectedOrder.ingredients)
+            intent.putExtra("order user name", selectedOrder.userName)
+            intent.putExtra("order user surname", selectedOrder.userSurname)
+            intent.putExtra("order user address", selectedOrder.userAddress)
+            intent.putExtra("order user cellular", selectedOrder.userCellular)
+            intent.putExtra("order user email", selectedOrder.userEmail)
+            intent.putExtra("order place date", selectedOrder.placeDate)
+            intent.putExtra("order arrive date", selectedOrder.arriveDate)
+            intent.putExtra("order state", selectedOrder.orderState)
 
-            Log.v(TAG, placedOrders[position].toString())
+            Log.v(TAG, selectedOrder.toString())
 
-            //startActivity(intent)
+            startActivity(intent)
         }
     }
 
     override fun onStart() {
         super.onStart()
-        if(mUsersChildListener == null)
-            mUsersChildListener = getUsersChildEventListener()
-        mUserReference!!.addChildEventListener(mUsersChildListener)
+        if(mOrderChildListener == null)
+            mOrderChildListener = getUsersChildEventListener()
+        mOrderReference!!.addChildEventListener(mOrderChildListener)
     }
 
     override fun onStop() {
         super.onStop()
-        if(mUsersChildListener != null)
-            mUserReference!!.removeEventListener(mUsersChildListener)
+        if(mOrderChildListener != null)
+            mOrderReference!!.removeEventListener(mOrderChildListener)
     }
 
     private fun getUsersChildEventListener(): ChildEventListener {
