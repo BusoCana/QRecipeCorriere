@@ -55,11 +55,12 @@ class SecondActivity : AppCompatActivity() {
         Log.v(TAG, order.toString() + "\nIngredient size: ${ingredientsPart.size}")
 
         // pass data to the Adapter
-        ingredientsListView.adapter = SecondAdapter(this, ingredientsPart)
+        //ingredientsListView.adapter = SecondAdapter(this, ingredientsPart)
 
         //enable button when all check box are checked
-        sendButton.isEnabled = false
+       // sendButton.isEnabled = false
 
+        /*
         ingredientsListView.setOnItemClickListener { parent, view, position, id ->
             val checkBox = view.findViewById<CheckBox>(R.id.checkBox)
 
@@ -87,6 +88,8 @@ class SecondActivity : AppCompatActivity() {
 
             //TODO: update order state in firebase (orderState = "arrived")
         }
+
+         */
 
     }
 

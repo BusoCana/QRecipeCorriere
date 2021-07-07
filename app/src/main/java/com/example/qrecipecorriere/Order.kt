@@ -20,6 +20,8 @@ class Order(var ingredients: String, var userName: String, var userSurname: Stri
         this.arriveDate = arriveDate
     }
 
+    constructor(): this("", "", "", "", "", "", "", "", "", "") {}
+
     private fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
         val formatter = SimpleDateFormat(format, locale)
         return formatter.format(this)
@@ -27,6 +29,19 @@ class Order(var ingredients: String, var userName: String, var userSurname: Stri
 
     private fun getCurrentDateTime(): Date {
         return Calendar.getInstance().time
+    }
+
+    fun set(newOrder: Order) {
+        this.id = newOrder.id
+        this.ingredients = newOrder.ingredients
+        this.userName = newOrder.userName
+        this.userSurname = newOrder.userSurname
+        this.userAddress = newOrder.userAddress
+        this.userCellular = newOrder.userCellular
+        this.userEmail = newOrder.userEmail
+        this.placeDate = newOrder.placeDate
+        this.arriveDate = newOrder.arriveDate
+        this.orderState = newOrder.orderState
     }
 
     override fun toString(): String {
