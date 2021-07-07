@@ -5,11 +5,17 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.CheckBox
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_second.*
 
 class SecondActivity : AppCompatActivity() {
 
     private val TAG = "SecondActivity"
+
+    private val ingredientsFragment = IngredientsFragment()
+    private val userFragment = UserFragment()
+    private val ingredientsBundle = Bundle()
+    private val userBundle = Bundle()
 
     private val m = MainActivity()
     private lateinit var order: Order
@@ -22,75 +28,65 @@ class SecondActivity : AppCompatActivity() {
         setContentView(R.layout.activity_second)
         setSupportActionBar(toolbar)
 
+        Log.v(TAG, "onCreate")
+
+        //init order
+        initOrder()
 
         toolbar.setNavigationOnClickListener {
-            //TODO: update order state in firebase (orderState = "placed")
-
-            if(!arrived) {
-                order.orderState = "placed"
-                m.addOrderToList(order)
-                Log.v(TAG, "Send not arrived order: ${order.id}, to main activity")
-            }
+            //update order state in firebase (orderState = "placed")
+            if(!arrived)
+                m.changeOrderStateToPlaced(order)
 
             //close second activity
             this.finish()
         }
 
-        //take order info from MainActivity intent
-        val id = intent.getStringExtra("order id").toString()
-        val ingredients = intent.getStringExtra("order ingredients").toString()
-        val userName = intent.getStringExtra("order user name").toString()
-        val userSurname = intent.getStringExtra("order user surname").toString()
-        val userAddress = intent.getStringExtra("order user address").toString()
-        val userCellular = intent.getStringExtra("order user cellular").toString()
-        val userEmail = intent.getStringExtra("order user email").toString()
-        val placeDate = intent.getStringExtra("order place date").toString()
-        val arriveDate = intent.getStringExtra("order arrive date").toString()
-        val orderState = intent.getStringExtra("order state").toString()
-
-        order = Order(id, ingredients, userName, userSurname, userAddress, userCellular, userEmail, placeDate, arriveDate, orderState)
-
-        //split different ingredients
-        val ingredientsPart = order.ingredients.split("-")
-        Log.v(TAG, order.toString() + "\nIngredient size: ${ingredientsPart.size}")
-
-        // pass data to the Adapter
-        //ingredientsListView.adapter = SecondAdapter(this, ingredientsPart)
-
-        //enable button when all check box are checked
-       // sendButton.isEnabled = false
-
-        /*
-        ingredientsListView.setOnItemClickListener { parent, view, position, id ->
-            val checkBox = view.findViewById<CheckBox>(R.id.checkBox)
-
-            Log.v(TAG, "cont before: $checked")
-
-            if(checkBox.isChecked) {
-                checkBox.isChecked = false
-                checked--
-            } else {
-                checkBox.isChecked = true
-                checked++
+        //bottom navigation bar listener
+        bottom_nav.setOnNavigationItemSelectedListener(){
+            when(it.itemId) {
+                R.id.item_ingredients -> replaceFragments(ingredientsFragment)
+                R.id.item_user -> replaceFragments(userFragment)
             }
-
-            Log.v(TAG, "cont after: $checked")
-
-            //enabled button if all check box are checked
-            sendButton.isEnabled = (checked == ingredientsPart.size)
+            true
         }
 
-        //handle button pressed
-        sendButton.setOnClickListener {
-            Toast.makeText(this, "Order arrived to user address", Toast.LENGTH_SHORT).show()
-            Log.v(TAG, "Order arrived to user address")
-            arrived = true
+    }
 
-            //TODO: update order state in firebase (orderState = "arrived")
-        }
+    private fun initOrder() {
+        Log.v(TAG, "initOrder")
 
-         */
+        //init order
+        order = Order(intent.getStringExtra("order id").toString(),
+            intent.getStringExtra("order ingredients").toString(),
+            intent.getStringExtra("order user name").toString(),
+            intent.getStringExtra("order user surname").toString(),
+            intent.getStringExtra("order user address").toString(),
+            intent.getStringExtra("order user cellular").toString(),
+            intent.getStringExtra("order user email").toString(),
+            intent.getStringExtra("order place date").toString(),
+            intent.getStringExtra("order arrive date").toString(),
+            intent.getStringExtra("order state").toString())
 
+        //pass arguments to fragments
+        ingredientsBundle.putString("ingredients", order.ingredients)
+        ingredientsFragment.arguments = ingredientsBundle
+
+        userBundle.putString("user name", order.userName)
+        userBundle.putString("user surname", order.userSurname)
+        userBundle.putString("user address", order.userAddress)
+        userBundle.putString("user cellular", order.userCellular)
+        userBundle.putString("user email", order.userEmail)
+        userFragment.arguments = userBundle
+
+        replaceFragments(ingredientsFragment)
+    }
+
+    //bottom navigation fragment replace
+    private fun replaceFragments (fragment: Fragment){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragmentView, fragment)
+        transaction.commit()
     }
 
 

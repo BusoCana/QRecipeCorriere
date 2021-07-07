@@ -127,12 +127,10 @@ class MainActivity : AppCompatActivity() {
         return childEventListener
     }
 
-    //TODO: in teoria non serve, controllare
-    fun addOrderToList(o: Order) {
-        if(o.orderState == "placed")
-            placedOrders.add(o)
-        adapter.notifyDataSetChanged()
-        Log.v(TAG, "added not arrived order: ${o.id}, to list")
+    fun changeOrderStateToPlaced(o: Order) {
+        if(o.orderState == "in charge")
+            mOrderReference!!.child(o.id).child("orderState").setValue("placed")
+
     }
 
 }
