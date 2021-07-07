@@ -71,7 +71,7 @@ class SecondActivity : AppCompatActivity() {
         titleIDValue.text = order.id
 
         //pass arguments to fragments
-        ingredientsBundle.putString("order id", order.ingredients)
+        ingredientsBundle.putString("order id", order.id)
         ingredientsBundle.putString("ingredients", order.ingredients)
         ingredientsFragment.arguments = ingredientsBundle
 

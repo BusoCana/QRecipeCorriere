@@ -38,10 +38,10 @@ class IngredientsFragment : Fragment() {
             val checkBox = view.findViewById<CheckBox>(R.id.checkBox)
 
             if (checkBox.isChecked) {
-                checkBox.isChecked = true
+                checkBox.isChecked = false
                 checked--
             } else {
-                checkBox.isChecked = false
+                checkBox.isChecked = true
                 checked++
             }
 
@@ -51,7 +51,7 @@ class IngredientsFragment : Fragment() {
 
         //handle pack delivery
         sendButton.setOnClickListener {
-            //TODO: update order state in firebase (orderState = "arrived")
+            //update order state in firebase (orderState = "arrived")
             m.changeOrderStateToArrived(arguments?.getString("order id").toString())
         }
     }
