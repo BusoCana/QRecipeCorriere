@@ -20,7 +20,6 @@ class SecondActivity : AppCompatActivity() {
     private val m = MainActivity()
     private lateinit var order: Order
 
-    private var checked = 0
     private var arrived = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +35,7 @@ class SecondActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener {
             //update order state in firebase (orderState = "placed")
             if(!arrived)
-                m.changeOrderStateToPlaced(order)
+                m.changeOrderStateToPlaced(order.id)
 
             //close second activity
             this.finish()
@@ -68,7 +67,11 @@ class SecondActivity : AppCompatActivity() {
             intent.getStringExtra("order arrive date").toString(),
             intent.getStringExtra("order state").toString())
 
+        //update title view
+        titleIDValue.text = order.id
+
         //pass arguments to fragments
+        ingredientsBundle.putString("order id", order.ingredients)
         ingredientsBundle.putString("ingredients", order.ingredients)
         ingredientsFragment.arguments = ingredientsBundle
 

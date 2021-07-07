@@ -7,6 +7,9 @@ import android.util.Log
 import android.widget.Toast
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
@@ -127,10 +130,23 @@ class MainActivity : AppCompatActivity() {
         return childEventListener
     }
 
-    fun changeOrderStateToPlaced(o: Order) {
-        if(o.orderState == "in charge")
-            mOrderReference!!.child(o.id).child("orderState").setValue("placed")
+    fun changeOrderStateToPlaced(id: String) {
+        mOrderReference!!.child(id).child("orderState").setValue("placed")
 
+    }
+
+    fun changeOrderStateToArrived(id: String) {
+        mOrderReference!!.child(id).child("orderState").setValue("arrived")
+        mOrderReference!!.child(id).child("arriveDate").setValue(getCurrentDateTime().toString("dd/MM/yyyy HH:mm:ss"))
+    }
+
+    private fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
+        val formatter = SimpleDateFormat(format, locale)
+        return formatter.format(this)
+    }
+
+    private fun getCurrentDateTime(): Date {
+        return Calendar.getInstance().time
     }
 
 }
