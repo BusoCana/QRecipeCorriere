@@ -1,5 +1,6 @@
 package com.example.qrecipecorriere
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,6 +15,7 @@ class IngredientsFragment : Fragment() {
     private val TAG = "IngredientsFragment"
 
     private val m = MainActivity()
+
 
     private var checked = 0
 
@@ -53,6 +55,7 @@ class IngredientsFragment : Fragment() {
         sendButton.setOnClickListener {
             //update order state in firebase (orderState = "arrived")
             m.changeOrderStateToArrived(arguments?.getString("order id").toString())
+
         }
     }
 

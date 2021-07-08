@@ -3,8 +3,6 @@ package com.example.qrecipecorriere
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.CheckBox
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_second.*
 
@@ -20,7 +18,7 @@ class SecondActivity : AppCompatActivity() {
     private val m = MainActivity()
     private lateinit var order: Order
 
-    private var arrived = false
+    var arrived = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +32,10 @@ class SecondActivity : AppCompatActivity() {
 
         toolbar.setNavigationOnClickListener {
             //update order state in firebase (orderState = "placed")
-            if(!arrived)
-                m.changeOrderStateToPlaced(order.id)
-
+            Log.v("prova", arrived.toString())
+            if(!arrived) {
+               m.changeOrderStateToPlaced(order.id)
+           }
             //close second activity
             this.finish()
         }

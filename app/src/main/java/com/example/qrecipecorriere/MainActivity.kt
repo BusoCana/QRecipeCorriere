@@ -22,9 +22,11 @@ class MainActivity : AppCompatActivity() {
     private val placedOrders = ArrayList<Order>()
     private val adapter = MainAdapter(this, placedOrders)
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         //populate list view
         placedOrdersView.adapter = adapter
@@ -33,8 +35,11 @@ class MainActivity : AppCompatActivity() {
         placedOrdersView.setOnItemClickListener { parent, view, position, id ->
             val selectedOrder: Order = placedOrders[position]
 
+
+
             //update order state in firebase (orderState = "in charge")
             selectedOrder.orderState = "in charge"
+            placedOrders.clear()
             mOrderReference!!.child(selectedOrder.id).child("orderState").setValue("in charge")
 
             //create intent to second activity with the selected order and start second activity
@@ -52,7 +57,6 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("order state", selectedOrder.orderState)
 
             Log.v(TAG, selectedOrder.toString())
-
             startActivity(intent)
         }
     }
@@ -82,6 +86,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
                 Log.d(TAG, "onChildChanged: " + snapshot.key!!)
+
 
                 //insert into newOrder the info of the changed child and cast into a Order
                 val newOrder = snapshot.getValue(Order::class.java)
@@ -132,7 +137,6 @@ class MainActivity : AppCompatActivity() {
 
     fun changeOrderStateToPlaced(id: String) {
         mOrderReference!!.child(id).child("orderState").setValue("placed")
-
     }
 
     fun changeOrderStateToArrived(id: String) {
