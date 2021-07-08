@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_ingredients.*
 
 class IngredientsFragment : Fragment() {
@@ -33,6 +34,8 @@ class IngredientsFragment : Fragment() {
 
         //get order info from bundle arguments
         val ingredients: List<String> = arguments?.getString("ingredients").toString().split("-")
+
+        //Toast.makeText(requireContext(),arguments?.getString("user address").toString(), Toast.LENGTH_LONG).show()
 
         //pass ingredients to adapter
         ingredientsListView.adapter = SecondAdapter(this.requireContext(), ingredients)

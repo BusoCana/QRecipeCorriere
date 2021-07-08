@@ -3,8 +3,10 @@ package com.example.qrecipecorriere
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_second.*
+import kotlinx.android.synthetic.main.fragment_user.*
 
 class SecondActivity : AppCompatActivity() {
 
@@ -46,7 +48,7 @@ class SecondActivity : AppCompatActivity() {
         bottom_nav.setOnNavigationItemSelectedListener(){
             when(it.itemId) {
                 R.id.item_ingredients -> replaceFragments(ingredientsFragment)
-                R.id.item_user -> replaceFragments(userFragment)
+                R.id.item_user -> replaceFragments(mapsFragment)
             }
             true
         }
@@ -83,8 +85,10 @@ class SecondActivity : AppCompatActivity() {
         userBundle.putString("user email", order.userEmail)
         userFragment.arguments = userBundle
 
+
         mapsBundle.putString("user address", order.userAddress)
         mapsFragment.arguments = mapsBundle
+
 
         replaceFragments(ingredientsFragment)
     }
@@ -95,6 +99,5 @@ class SecondActivity : AppCompatActivity() {
         transaction.replace(R.id.fragmentView, fragment)
         transaction.commit()
     }
-
 
 }

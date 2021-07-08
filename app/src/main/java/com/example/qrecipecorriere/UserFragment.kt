@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_ingredients.*
 import kotlinx.android.synthetic.main.fragment_user.*
 
@@ -23,12 +24,14 @@ class UserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         //get user info from arguments
         val name = arguments?.getString("user name").toString()
         val surname = arguments?.getString("user surname").toString()
         val address = arguments?.getString("user address").toString()
         val cellular = arguments?.getString("user cellular").toString()
         val email = arguments?.getString("user email").toString()
+
 
         //set text view
         userNameView.text = name

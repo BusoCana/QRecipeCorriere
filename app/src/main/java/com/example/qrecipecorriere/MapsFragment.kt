@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -23,7 +24,7 @@ class MapsFragment : Fragment() {
 
     private val TAG = "MapsFragment"
 
-    private lateinit var userAddress: String
+    private lateinit var userAddress : String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_maps, container, false)
@@ -33,11 +34,13 @@ class MapsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //perchè non trova arguments dio madonna de dio
-        Log.v(TAG, arguments?.getString("user address").toString())
         userAddress = arguments?.getString("user address").toString()
+        Toast.makeText(requireContext(), userAddress, Toast.LENGTH_LONG).show()
+
+
 
         val callback = OnMapReadyCallback { googleMap ->
-            val userLocation = getLocationFromAddress(this.requireContext(), "Crosio della Valle, via S.Apollinare 19")
+            val userLocation = getLocationFromAddress(this.requireContext(), userAddress)
             googleMap.addMarker(MarkerOptions().position(userLocation).title("Marker in Reciver Location"))
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 13f))
 
