@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
     private val placedOrders = ArrayList<Order>()
     private val adapter = MainAdapter(this, placedOrders)
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -34,8 +33,6 @@ class MainActivity : AppCompatActivity() {
         //on item clicked start second activity
         placedOrdersView.setOnItemClickListener { parent, view, position, id ->
             val selectedOrder: Order = placedOrders[position]
-
-
 
             //update order state in firebase (orderState = "in charge")
             selectedOrder.orderState = "in charge"

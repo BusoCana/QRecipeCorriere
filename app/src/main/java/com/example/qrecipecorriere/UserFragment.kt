@@ -23,14 +23,6 @@ class UserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //get order info from bundle arguments
-        val name = arguments?.getString("user name").toString()
-
-        //pass ingredients to adapter
-        name_textView.text=name
-
-        //enable button when all check box are checked
-
     }
 
 }

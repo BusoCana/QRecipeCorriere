@@ -16,7 +16,7 @@ class IngredientsFragment : Fragment() {
 
     private val m = MainActivity()
 
-
+    private var arrived = false
     private var checked = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -26,6 +26,10 @@ class IngredientsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //init flag
+        arrived = false
+        checked = 0
 
         //get order info from bundle arguments
         val ingredients: List<String> = arguments?.getString("ingredients").toString().split("-")
@@ -48,15 +52,23 @@ class IngredientsFragment : Fragment() {
             }
 
             sendButton.isEnabled = (checked == ingredients.size)
-
         }
 
         //handle pack delivery
         sendButton.setOnClickListener {
+            //update arrived flag
+            arrived = true
+
             //update order state in firebase (orderState = "arrived")
             m.changeOrderStateToArrived(arguments?.getString("order id").toString())
 
+            //return to main activity
+            activity?.finish()
         }
+    }
+
+    fun getArrived(): Boolean {
+        return arrived
     }
 
 }

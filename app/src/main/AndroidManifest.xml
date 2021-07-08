@@ -20,7 +20,6 @@
             android:name=".SecondActivity"
             android:parentActivityName=".MainActivity">
         </activity>
-
     </application>
 
 </manifest>

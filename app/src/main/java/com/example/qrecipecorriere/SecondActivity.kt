@@ -18,8 +18,6 @@ class SecondActivity : AppCompatActivity() {
     private val m = MainActivity()
     private lateinit var order: Order
 
-    var arrived = false
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
@@ -31,11 +29,13 @@ class SecondActivity : AppCompatActivity() {
         initOrder()
 
         toolbar.setNavigationOnClickListener {
-            //update order state in firebase (orderState = "placed")
-            Log.v("prova", arrived.toString())
-            if(!arrived) {
+
+            //update order state in firebase (orderState = "placed") if the order isn't arrived
+            Log.v("prova", ingredientsFragment.getArrived().toString())
+            if(!ingredientsFragment.getArrived()) {
                m.changeOrderStateToPlaced(order.id)
-           }
+            }
+
             //close second activity
             this.finish()
         }
