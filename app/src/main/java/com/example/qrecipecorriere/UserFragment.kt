@@ -23,6 +23,20 @@ class UserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //get user info from arguments
+        val name = arguments?.getString("user name").toString()
+        val surname = arguments?.getString("user surname").toString()
+        val address = arguments?.getString("user address").toString()
+        val cellular = arguments?.getString("user cellular").toString()
+        val email = arguments?.getString("user email").toString()
+
+        //set text view
+        userNameView.text = name
+        userSurnameView.text = surname
+        userAddressView.text = address
+        userCellularView.text = cellular
+        userEmailView.text = email
+
     }
 
 }

@@ -10,7 +10,7 @@
     <item
         android:id="@+id/item_user"
         android:icon="@drawable/ic_info"
-        android:title="recipient info">
+        android:title="receiver info">
     </item>
 
 </menu>

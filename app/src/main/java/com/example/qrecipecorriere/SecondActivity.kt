@@ -12,8 +12,10 @@ class SecondActivity : AppCompatActivity() {
 
     private val ingredientsFragment = IngredientsFragment()
     private val userFragment = UserFragment()
+    private val mapsFragment = MapsFragment()
     private val ingredientsBundle = Bundle()
     private val userBundle = Bundle()
+    private val mapsBundle = Bundle()
 
     private val m = MainActivity()
     private lateinit var order: Order
@@ -80,6 +82,9 @@ class SecondActivity : AppCompatActivity() {
         userBundle.putString("user cellular", order.userCellular)
         userBundle.putString("user email", order.userEmail)
         userFragment.arguments = userBundle
+
+        mapsBundle.putString("user address", order.userAddress)
+        mapsFragment.arguments = mapsBundle
 
         replaceFragments(ingredientsFragment)
     }
