@@ -14,10 +14,8 @@ class SecondActivity : AppCompatActivity() {
 
     private val ingredientsFragment = IngredientsFragment()
     private val userFragment = UserFragment()
-    private val mapsFragment = MapsFragment()
     private val ingredientsBundle = Bundle()
     private val userBundle = Bundle()
-    private val mapsBundle = Bundle()
 
     private val m = MainActivity()
     private lateinit var order: Order
@@ -48,7 +46,7 @@ class SecondActivity : AppCompatActivity() {
         bottom_nav.setOnNavigationItemSelectedListener(){
             when(it.itemId) {
                 R.id.item_ingredients -> replaceFragments(ingredientsFragment)
-                R.id.item_user -> replaceFragments(mapsFragment)
+                R.id.item_user -> replaceFragments(userFragment)
             }
             true
         }
@@ -84,11 +82,6 @@ class SecondActivity : AppCompatActivity() {
         userBundle.putString("user cellular", order.userCellular)
         userBundle.putString("user email", order.userEmail)
         userFragment.arguments = userBundle
-
-
-        mapsBundle.putString("user address", order.userAddress)
-        mapsFragment.arguments = mapsBundle
-
 
         replaceFragments(ingredientsFragment)
     }
