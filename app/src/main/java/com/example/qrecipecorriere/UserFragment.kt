@@ -9,8 +9,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.Toast
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -57,8 +55,7 @@ class UserFragment : Fragment(), OnMapReadyCallback {
         val email = arguments?.getString("user email").toString()
 
         //set text view
-        userNameView.text = name
-        userSurnameView.text = surname
+        userNameSurnameView.text = name + " " + surname
         userAddressView.text = address
         userCellularView.text = cellular
         userEmailView.text = email
